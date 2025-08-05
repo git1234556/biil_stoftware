@@ -92,7 +92,7 @@ async def root():
 
 @app.get("/api/health")
 async def health():
-    return {"status": "healthy", "database": "connected" if db else "disconnected"}
+    return {"status": "healthy", "database": "connected" if db is not None else "disconnected"}
 
 @app.post("/api/estimates", response_model=EstimateResponse)
 async def create_estimate(estimate: EstimateRequest):
