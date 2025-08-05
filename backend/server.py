@@ -137,7 +137,7 @@ async def get_estimates():
 
 @app.get("/api/estimates/{estimate_id}", response_model=EstimateResponse)
 async def get_estimate(estimate_id: str):
-    if not estimates_collection:
+    if estimates_collection is None:
         raise HTTPException(status_code=500, detail="Database not connected")
     
     estimate = await estimates_collection.find_one({"id": estimate_id})
