@@ -96,7 +96,7 @@ class HavnCubeAPITester:
         }
         
         success, response = self.run_test("Create Estimate", "POST", "api/estimates", 201, estimate_data)
-        if success and 'id' in response:
+        if success and isinstance(response, dict) and 'id' in response:
             self.created_estimate_id = response['id']
             print(f"   Created estimate ID: {self.created_estimate_id}")
             print(f"   Estimate number: {response.get('estimate_number', 'N/A')}")
