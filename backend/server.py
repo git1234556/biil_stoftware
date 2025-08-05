@@ -175,7 +175,7 @@ async def update_estimate(estimate_id: str, estimate: EstimateRequest):
 
 @app.delete("/api/estimates/{estimate_id}")
 async def delete_estimate(estimate_id: str):
-    if not estimates_collection:
+    if estimates_collection is None:
         raise HTTPException(status_code=500, detail="Database not connected")
     
     result = await estimates_collection.delete_one({"id": estimate_id})
