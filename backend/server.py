@@ -96,7 +96,7 @@ async def health():
 
 @app.post("/api/estimates", response_model=EstimateResponse)
 async def create_estimate(estimate: EstimateRequest):
-    if not estimates_collection:
+    if estimates_collection is None:
         raise HTTPException(status_code=500, detail="Database not connected")
     
     # Generate ID and timestamps
