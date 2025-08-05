@@ -186,7 +186,7 @@ async def delete_estimate(estimate_id: str):
 
 @app.post("/api/estimates/{estimate_id}/pdf")
 async def generate_pdf(estimate_id: str):
-    if not estimates_collection:
+    if estimates_collection is None:
         raise HTTPException(status_code=500, detail="Database not connected")
     
     estimate = await estimates_collection.find_one({"id": estimate_id})
