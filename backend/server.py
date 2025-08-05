@@ -126,7 +126,7 @@ async def create_estimate(estimate: EstimateRequest):
 
 @app.get("/api/estimates", response_model=List[EstimateResponse])
 async def get_estimates():
-    if not estimates_collection:
+    if estimates_collection is None:
         raise HTTPException(status_code=500, detail="Database not connected")
     
     estimates = []
