@@ -94,7 +94,7 @@ async def root():
 async def health():
     return {"status": "healthy", "database": "connected" if db is not None else "disconnected"}
 
-@app.post("/api/estimates", response_model=EstimateResponse)
+@app.post("/api/estimates", response_model=EstimateResponse, status_code=201)
 async def create_estimate(estimate: EstimateRequest):
     if estimates_collection is None:
         raise HTTPException(status_code=500, detail="Database not connected")
